@@ -8,12 +8,13 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 var authRouter = require('./routes/auth');
+require('dotenv').config();
 
+const passport = require('passport');
 require('./passport');
 
 var app = express();
 
-require('dotenv').config();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -31,7 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/posts', postsRouter);
+app.use('/posts', passport.authenticate('jwt', {session: false}), postsRouter);
 app.use('/users', usersRouter);
 app.use('/', authRouter);
 

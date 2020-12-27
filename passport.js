@@ -3,6 +3,10 @@ var LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 const bcrypt = require("bcryptjs");
 
+const passportJWT = require('passport-jwt');
+const JWTStrategy = passportJWT.Strategy;
+const ExtractJWT = passportJWT.ExtractJwt;
+
 passport.use(new LocalStrategy(
     function(username, password, done){
         return User.findOne({username:username})
@@ -20,5 +24,19 @@ passport.use(new LocalStrategy(
                         }).catch(err=>done(err))
                 }
             }).catch(err=>done(err))
+    }
+));
+
+passport.use(new JWTStrategy({
+        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+        secretOrKey: process.env.secret
+    },
+    function(jwtPayload, done){
+        // return User.findOne({username: jwtPayload.username})
+        return User.findById(jwtPayload._id)
+            .then(user=>{
+                return done(null, user.toJSON()) ;
+            })
+            .catch(err=>done(err));
     }
 ));
