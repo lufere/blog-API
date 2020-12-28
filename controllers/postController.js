@@ -2,7 +2,10 @@ const Post = require('../models/post');
 const {body, validationResult} = require('express-validator');
 
 exports.post_list = (req, res, next)=>{
-    res.send('Get all the posts');
+    Post.find({})
+        .populate('author')
+        .then(results=> res.json({post_list:results}))
+        .catch(err=>next(err))
 }
 
 exports.post_create = [
@@ -21,18 +24,20 @@ exports.post_create = [
             published: req.body.published,
         });
 
-        if(!errors.isEmpty()) return res.status(400).json({post,errors:errors.array()});
+        if(!errors.isEmpty()) return res.status(400).json({errors:errors.array(),post});
 
         post.save((err)=>{
             if(err) return next(err);
             res.json({post});
         })
-        // res.send('Create a new post with user: ' +req.user.username);
     }
 ]
 
 exports.post_detail = (req, res, next) =>{
-    res.send('Show the post with id: ' + req.params.id);
+    Post.findById(req.params.id)
+        .populate('author')
+        .then(post=>res.json({post:post}))
+        .catch(err=>next(err));
 }
 
 exports.post_update = (req, res, next) => {
