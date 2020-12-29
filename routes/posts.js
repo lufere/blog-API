@@ -4,7 +4,7 @@ const passport = require('passport');
 
 var post_controller = require('../controllers/postController');
 var commentsRouter = require('./comments');
-router.use('/:userId/comments', commentsRouter);
+router.use('/:postId/comments', commentsRouter);
 
 router.get('/', post_controller.post_list);
 router.post('/', passport.authenticate('jwt', {session: false}), post_controller.post_create);
