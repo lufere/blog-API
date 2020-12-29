@@ -39,6 +39,7 @@ exports.comment_detail = (req, res, next) => {
 
 exports.comment_update = [
     body('content', "Comment content can't be empty").trim().escape().isLength({min:1}),
+    body('author', "Comment has to have an author").trim().escape().isLength({min:1}),
     (req, res, next) => {
         const errors = validationResult(req);
         var timestamp;
@@ -51,21 +52,34 @@ exports.comment_update = [
         var comment = new Comment({
             content: req.body.content,
             timestamp: timestamp,
-            author: req.author,
+            author: req.user,
             post: req.params.postId,
             _id: req.params.id
         });
 
         if(!errors.isEmpty()) res.status(400).json({errors:errors.array(),comment});
 
-        Comment.findByIdAndUpdate(req.params.id,comment,{new:true})
-            .then(updatedComment=>res.json({comment:updatedComment}))
-            .catch(err=>next(err));
+        if(req.user._id.toString() === req.body.author){
+            Comment.findByIdAndUpdate(req.params.id,comment,{new:true})
+                .then(updatedComment=>res.json({comment:updatedComment}))
+                .catch(err=>next(err));
+        }else{
+            res.status(403).json({errors:'Unauthorized user'});
+        }
     }
 ] 
 
 exports.comment_delete = (req, res, next) => {
-    Comment.findByIdAndDelete(req.params.id)
-        .then(deletedComment=> res.json({deletedComment}))
+    Comment.findById(req.params.id)
+        .select('author')
+        .then(comment=>{
+            if(comment.author._id.toString()===req.user._id.toString()){
+                Comment.findByIdAndDelete(req.params.id)
+                    .then(deletedComment=> res.json({deletedComment}))
+                    .catch(err=>next(err));
+            }else{
+                res.status(403).json({erorrs:'Unauthorized user'});
+            }
+        })
         .catch(err=>next(err));
 }
