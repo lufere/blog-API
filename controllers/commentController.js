@@ -37,10 +37,35 @@ exports.comment_detail = (req, res, next) => {
         .catch(err=>next(err));
 }
 
-exports.comment_update = (req, res, next) => {
-    res.send('Update comment with id: ' + req.params.id + ' from the post with id: ' + req.params.postId);
-}
+exports.comment_update = [
+    body('content', "Comment content can't be empty").trim().escape().isLength({min:1}),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        var timestamp;
+
+        Comment.findById(req.params.id)
+            .select('timestamp')
+            .then(comment=>timestamp=comment.timestamp)
+            .catch(err=>next(err));
+
+        var comment = new Comment({
+            content: req.body.content,
+            timestamp: timestamp,
+            author: req.author,
+            post: req.params.postId,
+            _id: req.params.id
+        });
+
+        if(!errors.isEmpty()) res.status(400).json({errors:errors.array(),comment});
+
+        Comment.findByIdAndUpdate(req.params.id,comment,{new:true})
+            .then(updatedComment=>res.json({comment:updatedComment}))
+            .catch(err=>next(err));
+    }
+] 
 
 exports.comment_delete = (req, res, next) => {
-    res.send('Delete comment with id: ' + req.params.id + ' from the post with id: ' + req.params.postId);
+    Comment.findByIdAndDelete(req.params.id)
+        .then(deletedComment=> res.json({deletedComment}))
+        .catch(err=>next(err));
 }
