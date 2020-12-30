@@ -1,7 +1,9 @@
 var User = require('../models/user');
 
 exports.user_list = (req, res, next) => {
-    res.send('Get all users');
+    User.find({})
+        .then(results=>res.json({users: results}))
+        .catch(err=>next(err));
 }
 
 exports.user_create = (req, res, next) => {
@@ -9,7 +11,9 @@ exports.user_create = (req, res, next) => {
 }
 
 exports.user_detail = (req, res, next) => {
-    res.send('Show user with id: ' + req.params.id);
+    User.findById(req.params.id)
+        .then(user=>res.json({user}))
+        .catch(err=>next(err));
 }
 
 exports.user_update = (req, res, next) => {
