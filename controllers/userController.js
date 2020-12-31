@@ -28,7 +28,27 @@ exports.user_update = [
         var user;
         User.findById(req.params.id)
             .then(foundUser=>{
-                if(!req.body.password){
+                if(req.body.password){
+                    bcrypt.hash(req.body.password,10)
+                    .then(hashedPassword=>{
+                        console.log(req.body.username);
+                        user = new User({
+                            username: req.body.username,
+                            password:hashedPassword,
+                            creator:req.body.creator,
+                            _id: req.params.id,
+                        })
+                        if(!errors.isEmpty()) res.json({errors:errors.array()})
+                        if(foundUser._id.toString()===req.user._id.toString()){
+                            User.findByIdAndUpdate(req.params.id,user,{new:true})
+                                .then(updatedUser=>res.json({updatedUser}))
+                                .catch(err=>next(err));
+                        }else{
+                            res.status(403).json({errors:'Unauthorized User'})
+                        }
+                    })
+                    .catch(err=>next(err));
+                }else{
                     user = new User({
                         username: req.body.username,
                         password: foundUser.password,
@@ -36,25 +56,13 @@ exports.user_update = [
                         _id: req.params.id,
                     })
                     if(!errors.isEmpty()) res.json({errors:errors.array()})
-                    User.findByIdAndUpdate(req.params.id,user,{new:true})
-                        .then(updatedUser=>res.json({updatedUser}))
-                        .catch(err=>next(err));
-                }else{
-                    bcrypt.hash(req.body.password,10)
-                        .then(hashedPassword=>{
-                            console.log(req.body.username);
-                            user = new User({
-                                username: req.body.username,
-                                password:hashedPassword,
-                                creator:req.body.creator,
-                                _id: req.params.id,
-                            })
-                            if(!errors.isEmpty()) res.json({errors:errors.array()})
-                            User.findByIdAndUpdate(req.params.id,user,{new:true})
-                                .then(updatedUser=>res.json({updatedUser}))
-                                .catch(err=>next(err));
-                        })
-                        .catch(err=>next(err));
+                    if(foundUser._id.toString()===req.user._id.toString()){
+                        User.findByIdAndUpdate(req.params.id,user,{new:true})
+                            .then(updatedUser=>res.json({updatedUser}))
+                            .catch(err=>next(err));
+                    }else{
+                        res.status(403).json({errors:'Unauthorized User'})
+                    }
                 }
             })
             .catch(err=>next(err));
@@ -62,7 +70,15 @@ exports.user_update = [
 ]
 
 exports.user_delete = (req, res, next) => {
-    User.findByIdAndDelete(req.params.id)
-        .then(deletedUser=>res.json({deletedUser}))
+    User.findById(req.params.id)
+        .then(foundUser=>{
+            if(foundUser._id.toString()===req.user._id.toString()){
+                User.findByIdAndDelete(req.params.id)
+                    .then(deletedUser=>res.json({deletedUser}))
+                    .catch(err=>next(err));
+            }else{
+                res.status(403).json({errors:'Unauthorized User'})
+            }
+        })
         .catch(err=>next(err));
 }
