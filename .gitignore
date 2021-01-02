@@ -1,2 +1,10 @@
 node_modules/
 .env
+
+client/node_modules
+client/.pnp
+client/.pnp.js
+
+client/build
+
+client/.DS_Store
