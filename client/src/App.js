@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import './App.css';
 
 import BlogPreview from './blogPreview';
@@ -35,11 +36,17 @@ function App() {
   }, [posts])
 
   return (
-    <div className="App">
-      <header className="App-header">
-        {postList}
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path='/'>
+          <div className="App">
+            <header className="App-header">
+              {postList}
+            </header>
+          </div>
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
