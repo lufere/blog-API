@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
+import BlogPreview from './blogPreview';
+
 function App() {
   const [posts, setPosts] = useState([]);
   const [postList, setPostList] = useState();
@@ -18,14 +20,14 @@ function App() {
 
   useEffect(() => {
     console.log('These are the newests posts: ',posts)
-    
+
     setPostList(
       posts.map(post=>{
-        return <div className='blogPreview'>
-          <h2>{post.title}</h2>
-          <p>{post.author.username}</p>
-          <p>{post.content}</p>
-        </div>
+        return <BlogPreview
+          title = {post.title}
+          author = {post.author.username}
+          content = {post.content}
+        />
       })
     )
     console.log(postList)
@@ -36,10 +38,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         {postList}
-        {/* {testList}
-        <p>
-          Hello World
-        </p> */}
       </header>
     </div>
   );
