@@ -3,6 +3,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import './App.css';
 
 import BlogPreview from './blogPreview';
+import PostDetail from './PostDetail';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -16,22 +17,24 @@ function App() {
         // console.log(posts)
         setPosts(posts.post_list);
       })
+      .catch(err=>console.error(`Error: ${err}`));
   },[])
 
 
   useEffect(() => {
-    console.log('These are the newests posts: ',posts)
+    // console.log('These are the newests posts: ',posts)
 
     setPostList(
       posts.map(post=>{
         return <BlogPreview
+          key = {post.title+' - '+post.author}
           title = {post.title}
           author = {post.author.username}
           content = {post.content}
         />
       })
     )
-    console.log(postList)
+    // console.log(postList)
     // console.log(posts[0].title)
   }, [posts])
 
@@ -44,6 +47,9 @@ function App() {
               {postList}
             </header>
           </div>
+        </Route>
+        <Route path='/posts/:id'>
+          <PostDetail/>
         </Route>
       </Switch>
     </BrowserRouter>
