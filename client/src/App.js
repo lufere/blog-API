@@ -8,6 +8,7 @@ import PostDetail from './PostDetail';
 function App() {
   const [posts, setPosts] = useState([]);
   const [postList, setPostList] = useState();
+  const [BlogDetail, setBlogDetail] = useState('placeholder');
   // var postList = <p></p>;
 
   useEffect(()=>{
@@ -19,6 +20,11 @@ function App() {
       })
       .catch(err=>console.error(`Error: ${err}`));
   },[])
+
+  function onLoad(data){
+    console.log('data',data)
+    setBlogDetail(data);
+  }
 
 
   useEffect(() => {
@@ -49,7 +55,10 @@ function App() {
           </div>
         </Route>
         <Route path='/posts/:id'>
-          <PostDetail/>
+          <PostDetail
+            data={BlogDetail}
+            onLoad = {(data)=>onLoad(data)}
+          />
         </Route>
       </Switch>
     </BrowserRouter>
