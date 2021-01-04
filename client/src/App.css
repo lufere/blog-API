@@ -51,3 +51,14 @@ a:visited{
   color: white;
   text-decoration: none;
 }
+
+.comment{
+  border: 2px solid white;
+  margin-bottom: 10px;
+}
+
+h2{
+  margin-top: 50px;
+  color:white;
+  border-top: 1px solid white;
+}

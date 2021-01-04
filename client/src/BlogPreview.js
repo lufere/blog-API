@@ -10,7 +10,6 @@ const BlogPreview = props => {
                 <h1>{props.title}</h1>
                 <p>{props.author}</p>
                 <p>{props.content}</p>
-                <p>{props.postId}</p>
             </div>
         </Link>
     )

@@ -8,7 +8,8 @@ import BlogDetail from './BlogDetail';
 function App() {
   const [posts, setPosts] = useState([]);
   const [postList, setPostList] = useState();
-  const [PostDetail, setPostDetail] = useState('placeholder');
+  const [postDetail, setPostDetail] = useState('placeholder');
+  const [postComments, setPostComments] = useState([]);
   // var postList = <p></p>;
 
   useEffect(()=>{
@@ -22,8 +23,10 @@ function App() {
   },[])
 
   function onLoad(data){
-    // console.log('data',data)
-    setPostDetail(data);
+    console.log('data',data)
+    setPostDetail(data[0].post);
+    setPostComments(data[1].comments);
+    // console.log(PostComments);
   }
 
 
@@ -57,7 +60,8 @@ function App() {
         </Route>
         <Route path='/posts/:id'>
           <BlogDetail
-            data={PostDetail}
+            data={postDetail}
+            comments={postComments}
             onLoad = {(data)=>onLoad(data)}
           />
         </Route>
