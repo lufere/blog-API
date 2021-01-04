@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 
-const PostDetail = props => {
+const BlogDetail = props => {
     const {id} = useParams();
 
     useEffect(()=>{
@@ -17,10 +17,12 @@ const PostDetail = props => {
 
     return(
         <div>
-            This is the post with ID: {id} 
-            <p>{props.data.title}</p>
+            <Link to='/'>Back</Link>
+            <h1>{props.data.title}</h1>
+            <p>{props.data.author?props.data.author.username:null}</p>
+            <p>{props.data.content}</p>
         </div>
     )
 }
 
-export default PostDetail
+export default BlogDetail

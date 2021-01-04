@@ -42,3 +42,12 @@
   padding: 10px 30px 10px 30px;
   margin-bottom: 20px;
 }
+
+a{
+  text-decoration: none;
+}
+
+a:visited{
+  color: white;
+  text-decoration: none;
+}

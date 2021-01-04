@@ -2,28 +2,28 @@ import { useEffect, useState } from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import './App.css';
 
-import BlogPreview from './blogPreview';
-import PostDetail from './PostDetail';
+import BlogPreview from './BlogPreview';
+import BlogDetail from './BlogDetail';
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [postList, setPostList] = useState();
-  const [BlogDetail, setBlogDetail] = useState('placeholder');
+  const [PostDetail, setPostDetail] = useState('placeholder');
   // var postList = <p></p>;
 
   useEffect(()=>{
     fetch('/posts')
       .then(posts =>posts.json())
       .then(posts =>{
-        // console.log(posts)
+        console.log(posts)
         setPosts(posts.post_list);
       })
       .catch(err=>console.error(`Error: ${err}`));
   },[])
 
   function onLoad(data){
-    console.log('data',data)
-    setBlogDetail(data);
+    // console.log('data',data)
+    setPostDetail(data);
   }
 
 
@@ -37,6 +37,7 @@ function App() {
           title = {post.title}
           author = {post.author.username}
           content = {post.content}
+          postId = {post._id}
         />
       })
     )
@@ -55,8 +56,8 @@ function App() {
           </div>
         </Route>
         <Route path='/posts/:id'>
-          <PostDetail
-            data={BlogDetail}
+          <BlogDetail
+            data={PostDetail}
             onLoad = {(data)=>onLoad(data)}
           />
         </Route>
