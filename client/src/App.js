@@ -4,6 +4,7 @@ import './App.css';
 
 import BlogPreview from './BlogPreview';
 import BlogDetail from './BlogDetail';
+import LogIn from './LogIn';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -63,6 +64,11 @@ function App() {
             data={postDetail}
             comments={postComments}
             onLoad = {(data)=>onLoad(data)}
+          />
+        </Route>
+        <Route to='/login'>
+          <LogIn
+
           />
         </Route>
       </Switch>

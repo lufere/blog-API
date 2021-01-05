@@ -33,7 +33,7 @@ router.post('/login', (req, res, next)=>{
             const token = jwt.sign(user, process.env.secret);
             return res.json({user:user, token:token});
         });
-    },{succesRedirect:'posts',failureRedirect:'/'})
+    },{succesRedirect:'/',failureRedirect:'/'})
     (req, res);
 
 })
