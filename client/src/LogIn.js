@@ -4,7 +4,6 @@ const LogIn = props => {
 
     function onSubmit(event){
         event.preventDefault();
-        console.log('test');
         fetch('/login',{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -15,9 +14,16 @@ const LogIn = props => {
         })
             .then(response=>response.json())
             .then(data=>{
-                console.log(data);
+                // console.log(data);
                 let token = data.token;
                 localStorage.setItem('authToken', token);
+                fetch('/users/5fe4f8d3690c0f10332c7695',{
+                    headers: {
+                        'Authorization': "Bearer " + token
+                    }
+                })
+                    .then(response=>response.json())
+                    .then(data=>console.log(data.user))
             })
     }
 

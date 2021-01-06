@@ -50,7 +50,7 @@ function App() {
         return <BlogPreview
           key = {post.title+' - '+post.author}
           title = {post.title}
-          author = {post.author.username}
+          author = {post.author?post.author.username:null}
           content = {post.content}
           postId = {post._id}
         />
