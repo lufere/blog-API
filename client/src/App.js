@@ -9,11 +9,15 @@ import LogIn from './LogIn';
 function App() {
   const [posts, setPosts] = useState([]);
   const [postList, setPostList] = useState();
-  const [postDetail, setPostDetail] = useState('placeholder');
+  const [postDetail, setPostDetail] = useState('');
   const [postComments, setPostComments] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   // var postList = <p></p>;
+
+  function reset(){
+    setPostDetail('');
+  }
 
   function handleChange(event){
     let name = event.target.name;
@@ -26,14 +30,14 @@ function App() {
     fetch('/posts')
       .then(posts =>posts.json())
       .then(posts =>{
-        console.log(posts)
+        // console.log(posts)
         setPosts(posts.post_list);
       })
       .catch(err=>console.error(`Error: ${err}`));
   },[])
 
   function onLoad(data){
-    console.log('data',data)
+    // console.log('data',data)
     setPostDetail(data[0].post);
     setPostComments(data[1].comments);
     // console.log(PostComments);
@@ -74,6 +78,8 @@ function App() {
             data={postDetail}
             comments={postComments}
             onLoad = {(data)=>onLoad(data)}
+            setPostDetail = {setPostDetail}
+            setPostComments = {setPostComments}
           />
         </Route>
         <Route to='/login'>

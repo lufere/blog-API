@@ -13,13 +13,11 @@ const BlogDetail = props => {
                 Promise.all(test)
                     .then(data=>onLoad(data))
             })
-        // fetch('/posts/' + id)
-        // .then(response=>response.json())
-        // .then(data=>{
-        //     console.log('Post: ', data.post)
-        //     props.onLoad(data.post)
-        // })
-        // .catch(err=>console.error(`Error: ${err}`));
+            return () =>{
+                // console.log('unmounted');
+                props.setPostDetail('');
+                props.setPostComments(null);
+            }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
@@ -38,7 +36,7 @@ const BlogDetail = props => {
             <h1>{props.data.title}</h1>
             <p>{props.data.author?props.data.author.username:null}</p>
             <p>{props.data.content}</p>
-            <h2>Comments ñ¿¿</h2>
+            <h2>Comments</h2>
             {commentList}
         </div>
     )
