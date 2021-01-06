@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
 import './App.css';
 
 import BlogPreview from './BlogPreview';
@@ -11,7 +11,16 @@ function App() {
   const [postList, setPostList] = useState();
   const [postDetail, setPostDetail] = useState('placeholder');
   const [postComments, setPostComments] = useState([]);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   // var postList = <p></p>;
+
+  function handleChange(event){
+    let name = event.target.name;
+    let value = event.target.value;
+    if(name==='username')setUsername(value)
+    if(name==='password')setPassword(value)
+  }
 
   useEffect(()=>{
     fetch('/posts')
@@ -54,6 +63,7 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <div className="App">
+            <Link to='/login'>LOGIN</Link>
             <header className="App-header">
               {postList}
             </header>
@@ -68,7 +78,9 @@ function App() {
         </Route>
         <Route to='/login'>
           <LogIn
-
+            username={username}
+            password={password}
+            onChange={handleChange}
           />
         </Route>
       </Switch>
