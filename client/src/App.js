@@ -84,6 +84,8 @@ function App() {
           <LogIn
             username={username}
             password={password}
+            setUsername={setUsername}
+            setPassword={setPassword}
             onChange={handleChange}
           />
         </Route>
