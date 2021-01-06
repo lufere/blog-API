@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const LogIn = props => {
 
@@ -18,6 +19,7 @@ const LogIn = props => {
 
     return(
         <div>
+            <Link to='/'>Back</Link>
             <form>
                 <label>Username:
                     <input
