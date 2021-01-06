@@ -15,10 +15,6 @@ function App() {
   const [password, setPassword] = useState('');
   // var postList = <p></p>;
 
-  function reset(){
-    setPostDetail('');
-  }
-
   function handleChange(event){
     let name = event.target.name;
     let value = event.target.value;
@@ -34,7 +30,9 @@ function App() {
         setPosts(posts.post_list);
       })
       .catch(err=>console.error(`Error: ${err}`));
+      console.log(localStorage.getItem('authToken'));
   },[])
+  
 
   function onLoad(data){
     // console.log('data',data)

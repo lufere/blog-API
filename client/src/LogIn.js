@@ -14,7 +14,11 @@ const LogIn = props => {
             })
         })
             .then(response=>response.json())
-            .then(data=>console.log(data))
+            .then(data=>{
+                console.log(data);
+                let token = data.token;
+                localStorage.setItem('authToken', token);
+            })
     }
 
     return(
