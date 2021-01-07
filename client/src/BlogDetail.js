@@ -4,14 +4,16 @@ import { Link, useParams } from "react-router-dom"
 
 const BlogDetail = props => {
     const {id} = useParams();
-    const {onLoad} = props;
 
     useEffect(()=>{
         Promise.all([fetch('/posts/' + id),fetch('/posts/'+ id + '/comments')])
             .then(values=>{
                 let test = values.map(x=>x.json())
                 Promise.all(test)
-                    .then(data=>onLoad(data))
+                    .then(data=>{
+                        props.setPostDetail(data[0].post);
+                        props.setPostComments(data[1].comments);
+                    })
             })
             return () =>{
                 // console.log('unmounted');
@@ -43,7 +45,15 @@ const BlogDetail = props => {
             })
         })
             .then(response=>response.json())
-            .then(data=>console.log(data))
+            .then(data=>{
+                fetch('/posts/'+ id + '/comments')
+                    .then(response=>response.json())
+                    .then(data=>{
+                        props.setPostComments(data.comments);
+                        props.setComment('');
+                    })
+                    .catch(err=>console.error(err));
+            })
             .catch(err=>console.error(err));
     }
 

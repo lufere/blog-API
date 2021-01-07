@@ -23,13 +23,6 @@ function App() {
     if(name==='comment')setComment(value)
   }
 
-  function onLoad(data){
-    // console.log('data',data)
-    setPostDetail(data[0].post);
-    setPostComments(data[1].comments);
-    // console.log(PostComments);
-  }
-
   return (
     <BrowserRouter>
       <Switch>
@@ -43,7 +36,6 @@ function App() {
           <BlogDetail
             data={postDetail}
             comments={postComments}
-            onLoad = {(data)=>onLoad(data)}
             setPostDetail = {setPostDetail}
             setPostComments = {setPostComments}
             comment = {comment}
