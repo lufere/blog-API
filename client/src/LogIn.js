@@ -15,21 +15,31 @@ const LogIn = props => {
         })
             .then(response=>response.json())
             .then(data=>{
-                // console.log(data);
-                let token = data.token;
-                localStorage.setItem('authToken', token);
-                props.setUsername('');
-                props.setPassword('');
-                fetch('/users/5fe4f8d3690c0f10332c7695',{
-                    headers: {
-                        'Authorization': "Bearer " + token
-                    }
-                })
-                    .then(response=>response.json())
-                    .then(data=>{
-                        console.log(data.user);
-                        history.push('/');
-                    })
+                console.log(data.status);
+                if(data.status===400){
+                    console.log('info', data.info)
+                    if(data.info && data.info.message) alert(data.info.message);
+                    props.setPassword('');
+                }
+                if(data.status===200){
+                    let token = data.token;
+                    console.log('user', data.user)
+                    localStorage.setItem('authToken', token);
+                    props.setUsername('');
+                    props.setPassword('');
+                    // console.log('passed through here')
+                    history.push('/');
+                }
+                // fetch('/users/5fe4f8d3690c0f10332c7695',{
+                //     headers: {
+                //         'Authorization': "Bearer " + token
+                //     }
+                // })
+                //     .then(response=>response.json())
+                //     .then(data=>{
+                //         console.log(data.user);
+                //         history.push('/');
+                //     })
             })
             .catch(err=>console.error(err));
     }
