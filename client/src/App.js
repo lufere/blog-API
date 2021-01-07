@@ -10,6 +10,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [postDetail, setPostDetail] = useState('');
   const [postComments, setPostComments] = useState([]);
+  const [comment, setComment] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   // var postList = <p></p>;
@@ -19,6 +20,7 @@ function App() {
     let value = event.target.value;
     if(name==='username')setUsername(value)
     if(name==='password')setPassword(value)
+    if(name==='comment')setComment(value)
   }
 
   function onLoad(data){
@@ -44,6 +46,9 @@ function App() {
             onLoad = {(data)=>onLoad(data)}
             setPostDetail = {setPostDetail}
             setPostComments = {setPostComments}
+            comment = {comment}
+            setComment = {setComment}
+            onChange={handleChange}
           />
         </Route>
         <Route to='/login'>

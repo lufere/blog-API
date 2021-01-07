@@ -14,7 +14,7 @@ const Homepage = props =>{
           })
           .catch(err=>console.error(`Error: ${err}`));
           console.log(localStorage.getItem('authToken'));
-          console.log(localStorage.getItem('currentUser'));
+        //   console.log(localStorage.getItem('currentUser'));
           // localStorage.clear();
     },[])
 

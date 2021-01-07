@@ -30,6 +30,23 @@ const BlogDetail = props => {
         )
     }
 
+    function onSubmit(event){
+        event.preventDefault();
+        fetch(`/posts/${id}/comments/`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + localStorage.getItem('authToken')
+            },
+            body: JSON.stringify({
+                "content":props.comment
+            })
+        })
+            .then(response=>response.json())
+            .then(data=>console.log(data))
+            .catch(err=>console.error(err));
+    }
+
     return(
         <div>
             <Link to='/'>Back</Link>
@@ -38,6 +55,16 @@ const BlogDetail = props => {
             <p>{props.data.content}</p>
             <h2>Comments</h2>
             {commentList}
+            <form>
+                <label> Make a comment:
+                    <textarea
+                        name='comment'
+                        value={props.comment}
+                        onChange={props.onChange}
+                    />
+                    <button onClick={onSubmit} type='submit'>Submit</button>
+                </label>
+            </form>
         </div>
     )
 }
