@@ -30,7 +30,9 @@ function App() {
         setPosts(posts.post_list);
       })
       .catch(err=>console.error(`Error: ${err}`));
-      console.log(localStorage.getItem('authToken'));
+      // console.log(localStorage.getItem('authToken'));
+      // console.log(localStorage.getItem('currentUser'));
+      // localStorage.clear();
   },[])
   
 
@@ -65,6 +67,7 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <div className="App">
+            <h3>Welcome {localStorage.getItem('currentUser')?JSON.parse(localStorage.getItem('currentUser')).username:null}</h3>
             <Link to='/login'>LOGIN</Link>
             <header className="App-header">
               {postList}
