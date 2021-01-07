@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react';
-import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
+import {useState } from 'react';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import './App.css';
 
-import BlogPreview from './BlogPreview';
 import BlogDetail from './BlogDetail';
 import LogIn from './LogIn';
+import Homepage from './Homepage';
 
 function App() {
   const [posts, setPosts] = useState([]);
-  const [postList, setPostList] = useState();
   const [postDetail, setPostDetail] = useState('');
   const [postComments, setPostComments] = useState([]);
   const [username, setUsername] = useState('');
@@ -22,20 +21,6 @@ function App() {
     if(name==='password')setPassword(value)
   }
 
-  useEffect(()=>{
-    fetch('/posts')
-      .then(posts =>posts.json())
-      .then(posts =>{
-        // console.log(posts)
-        setPosts(posts.post_list);
-      })
-      .catch(err=>console.error(`Error: ${err}`));
-      // console.log(localStorage.getItem('authToken'));
-      // console.log(localStorage.getItem('currentUser'));
-      // localStorage.clear();
-  },[])
-  
-
   function onLoad(data){
     // console.log('data',data)
     setPostDetail(data[0].post);
@@ -43,36 +28,14 @@ function App() {
     // console.log(PostComments);
   }
 
-
-  useEffect(() => {
-    // console.log('These are the newests posts: ',posts)
-
-    setPostList(
-      posts.map(post=>{
-        return <BlogPreview
-          key = {post.title+' - '+post.author}
-          title = {post.title}
-          author = {post.author?post.author.username:null}
-          content = {post.content}
-          postId = {post._id}
-        />
-      })
-    )
-    // console.log(postList)
-    // console.log(posts[0].title)
-  }, [posts])
-
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path='/'>
-          <div className="App">
-            <h3>Welcome {localStorage.getItem('currentUser')?JSON.parse(localStorage.getItem('currentUser')).username:null}</h3>
-            <Link to='/login'>LOGIN</Link>
-            <header className="App-header">
-              {postList}
-            </header>
-          </div>
+          <Homepage
+            setPosts = {setPosts}
+            posts = {posts}
+          />
         </Route>
         <Route path='/posts/:id'>
           <BlogDetail
