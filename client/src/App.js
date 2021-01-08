@@ -5,6 +5,7 @@ import './App.css';
 import BlogDetail from './BlogDetail';
 import LogIn from './LogIn';
 import Homepage from './Homepage';
+import Header from './Header';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <Header/>
       <Switch>
         <Route exact path='/'>
           <Homepage

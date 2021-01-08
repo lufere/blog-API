@@ -70,3 +70,18 @@ label{
 h3{
   color: white;
 }
+
+header{
+  background-color: blanchedalmond;
+  border: solid 1px blanchedalmond;
+  height: 50px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+header>p, header>a:visited{
+  color: black;
+}
