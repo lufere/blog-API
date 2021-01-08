@@ -5,6 +5,7 @@ import BlogPreview from "./BlogPreview"
 const Homepage = props =>{
 
     useEffect(()=>{
+      props.checkExpiration();
         fetch('/posts')
           .then(posts =>posts.json())
           .then(posts =>{
@@ -15,6 +16,7 @@ const Homepage = props =>{
           // console.log(localStorage.getItem('authToken'));
         //   console.log(localStorage.getItem('currentUser'));
           // localStorage.clear();
+          // console.log('Check expiration');
     },[])
 
         var postList = props.posts.map(post=>{

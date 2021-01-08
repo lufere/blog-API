@@ -4,7 +4,8 @@ import { Link } from "react-router-dom"
 const Header = props =>{
 
     useEffect(()=>{
-        console.log('updated');
+        // console.log('updated');
+        // props.checkExpiration();
     })
 
     if(localStorage.getItem('currentUser')){

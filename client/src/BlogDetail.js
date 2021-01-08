@@ -6,6 +6,7 @@ const BlogDetail = props => {
     const {id} = useParams();
 
     useEffect(()=>{
+        props.checkExpiration();
         Promise.all([fetch('/posts/' + id),fetch('/posts/'+ id + '/comments')])
             .then(values=>{
                 let test = values.map(x=>x.json())

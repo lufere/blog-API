@@ -1,5 +1,6 @@
 import {useState } from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 import './App.css';
 
 import BlogDetail from './BlogDetail';
@@ -24,14 +25,31 @@ function App() {
     if(name==='comment')setComment(value)
   }
 
+  function checkExpiration(){
+    if(localStorage.getItem('authToken')){
+      var isExpired = false;
+      const token = localStorage.getItem('authToken');
+      var decodedToken = jwt.decode(token, {complete:true});
+      var dateNow = new Date();
+      if(decodedToken.payload.exp < dateNow.getTime()/1000) isExpired = true;
+      if(isExpired) localStorage.clear();
+      // console.log(decodedToken.payload.exp);
+      // console.log(dateNow.getTime()/1000);
+      console.log(isExpired);
+    }
+  }
+
   return (
     <BrowserRouter>
-    <Header/>
+      <Header
+        checkExpiration = {checkExpiration}
+      />
       <Switch>
         <Route exact path='/'>
           <Homepage
             setPosts = {setPosts}
             posts = {posts}
+            checkExpiration = {checkExpiration}
           />
         </Route>
         <Route path='/posts/:id'>
@@ -43,6 +61,7 @@ function App() {
             comment = {comment}
             setComment = {setComment}
             onChange={handleChange}
+          checkExpiration = {checkExpiration}
           />
         </Route>
         <Route to='/login'>
