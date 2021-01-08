@@ -10,7 +10,9 @@ const Homepage = props =>{
           .then(posts =>posts.json())
           .then(posts =>{
             // console.log(posts)
-            props.setPosts(posts.post_list);
+              setTimeout(() => {
+                props.setPosts(posts.post_list);
+              }, 1100);
           })
           .catch(err=>console.error(`Error: ${err}`));
           // console.log(localStorage.getItem('authToken'));
@@ -28,15 +30,27 @@ const Homepage = props =>{
             postId = {post._id}
           />
         })
-    return(
-    <div className="App">
-        {/* <h3>Welcome {localStorage.getItem('currentUser')?JSON.parse(localStorage.getItem('currentUser')).username:null}</h3> */}
-        {/* <Link to='/login'>LOGIN</Link> */}
-        <div className="App-header">
-          {postList}
+    if(props.posts.length===0){
+      return(
+        <div className="spinner">
+          <div className="rect1"></div>
+          <div className="rect2"></div>
+          <div className="rect3"></div>
+          <div className="rect4"></div>
+          <div className="rect5"></div>
         </div>
-      </div>
-    )
+      )
+    }else{
+      return(
+        <div className="App">
+          {/* <h3>Welcome {localStorage.getItem('currentUser')?JSON.parse(localStorage.getItem('currentUser')).username:null}</h3> */}
+          {/* <Link to='/login'>LOGIN</Link> */}
+          <div className="App-header">
+            {postList}
+          </div>
+        </div>
+      )
+    }
 }
 
 export default Homepage

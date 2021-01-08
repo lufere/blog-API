@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from "react-router-dom"
-
+import './spinner.css'
 
 const BlogDetail = props => {
     const {id} = useParams();
@@ -12,8 +12,11 @@ const BlogDetail = props => {
                 let test = values.map(x=>x.json())
                 Promise.all(test)
                     .then(data=>{
-                        props.setPostDetail(data[0].post);
-                        props.setPostComments(data[1].comments);
+                        setTimeout(() => {
+                            props.setPostDetail(data[0].post);
+                            props.setPostComments(data[1].comments);
+                        }, 1100);
+
                     })
             })
             return () =>{
@@ -57,27 +60,41 @@ const BlogDetail = props => {
             })
             .catch(err=>console.error(err));
     }
+    if(!props.data){
+        return(
+            <div className="spinner">
+                <div className="rect1"></div>
+                <div className="rect2"></div>
+                <div className="rect3"></div>
+                <div className="rect4"></div>
+                <div className="rect5"></div>
+            </div>
+        )
+    }else{
+        return(
+            <div>
+                <Link to='/'>Back</Link>
+    
+                <h1>{props.data.title}</h1>
+                <p>{props.data.author?props.data.author.username:null}</p>
+                <p>{props.data.content}</p>
+                <h2>Comments</h2>
+                {/* <div className='spinner'></div> */}
+                {commentList}
+                <form>
+                    <label> Make a comment:
+                        <textarea
+                            name='comment'
+                            value={props.comment}
+                            onChange={props.onChange}
+                        />
+                        <button onClick={onSubmit} type='submit'>Submit</button>
+                    </label>
+                </form>
+            </div>
+        )
+    }
 
-    return(
-        <div>
-            <Link to='/'>Back</Link>
-            <h1>{props.data.title}</h1>
-            <p>{props.data.author?props.data.author.username:null}</p>
-            <p>{props.data.content}</p>
-            <h2>Comments</h2>
-            {commentList}
-            <form>
-                <label> Make a comment:
-                    <textarea
-                        name='comment'
-                        value={props.comment}
-                        onChange={props.onChange}
-                    />
-                    <button onClick={onSubmit} type='submit'>Submit</button>
-                </label>
-            </form>
-        </div>
-    )
 }
 
 export default BlogDetail
