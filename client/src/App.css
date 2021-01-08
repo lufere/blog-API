@@ -82,6 +82,14 @@ header{
   padding: 0 20px;
 }
 
-header>p, header>a:visited{
+header>p, header a:visited{
   color: black;
 }
+
+header>div>a{
+  margin-right: 10px;
+}
+
+/* .signup{
+  border: 1px solid red;
+} */

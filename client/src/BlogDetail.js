@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import './spinner.css'
 
 const BlogDetail = props => {
@@ -73,8 +73,6 @@ const BlogDetail = props => {
     }else{
         return(
             <div>
-                <Link to='/'>Back</Link>
-    
                 <h1>{props.data.title}</h1>
                 <p>{props.data.author?props.data.author.username:null}</p>
                 <p>{props.data.content}</p>

@@ -19,7 +19,10 @@ const Header = props =>{
         return(
             <header>
                 <Link to='/'>Blog API</Link>
-                <Link to='/login'>Login</Link>
+                <div>
+                    <Link to='/login'>Login</Link>
+                    <Link to='/signup'>Sign up</Link>
+                </div>
             </header>
         )
     }

@@ -7,6 +7,7 @@ import BlogDetail from './BlogDetail';
 import LogIn from './LogIn';
 import Homepage from './Homepage';
 import Header from './Header';
+import Signup from './Signup'
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -64,8 +65,17 @@ function App() {
           checkExpiration = {checkExpiration}
           />
         </Route>
-        <Route to='/login'>
+        <Route path='/login'>
           <LogIn
+            username={username}
+            password={password}
+            setUsername={setUsername}
+            setPassword={setPassword}
+            onChange={handleChange}
+          />
+        </Route>
+        <Route path='/signup'>
+          <Signup
             username={username}
             password={password}
             setUsername={setUsername}

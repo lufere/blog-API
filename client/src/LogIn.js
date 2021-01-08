@@ -1,7 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 const LogIn = props => {
     const history = useHistory();
+
+    useEffect(()=>{
+        props.setUsername('');
+        props.setPassword('');
+    },[])
 
     function onSubmit(event){
         event.preventDefault();
@@ -44,6 +51,7 @@ const LogIn = props => {
             })
             .catch(err=>console.error(err));
     }
+
     if(JSON.parse(localStorage.getItem('currentUser'))){
         return(
             <div>
@@ -54,7 +62,7 @@ const LogIn = props => {
     }else{
         return(
             <div>
-                <Link to='/'>Back</Link>
+            <h3>Log in</h3>
                 <form>
                     <label>Username:
                         <input

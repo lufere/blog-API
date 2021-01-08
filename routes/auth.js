@@ -6,15 +6,17 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
 router.post('/sign-up', (req, res, next) => {
+    // console.log(req,body.username)
+    // console.log(req,body.password)
     bcrypt.hash(req.body.password, 10, (err, hashedPassword) =>{
         if(err) return next(err);
         const user = new User({
             username: req.body.username,
             password: hashedPassword,
             creator: true,
-        }).save(err => {
+        }).save((err,user) => {
             if(err) return next(err);
-            res.redirect('/');
+            res.json({user});
         })
     })
 });
