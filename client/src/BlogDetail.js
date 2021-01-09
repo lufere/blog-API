@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import './spinner.css'
 
 const BlogDetail = props => {
@@ -79,16 +79,25 @@ const BlogDetail = props => {
                 <h2>Comments</h2>
                 {/* <div className='spinner'></div> */}
                 {commentList}
-                <form>
-                    <label> Make a comment:
-                        <textarea
-                            name='comment'
-                            value={props.comment}
-                            onChange={props.onChange}
-                        />
-                        <button onClick={onSubmit} type='submit'>Submit</button>
-                    </label>
-                </form>
+                {localStorage.getItem('currentUser')?
+                    <form>
+                        <label> Make a comment:
+                            <textarea
+                                name='comment'
+                                value={props.comment}
+                                onChange={props.onChange}
+                            />
+                            <button onClick={onSubmit} type='submit'>Submit</button>
+                        </label>
+                    </form>
+                    :<p className='userRequired'>
+                        You need to be a user to leave comments. 
+                        <Link to='/login'> Log in </Link>
+                        or 
+                        <Link to='/signup'> Sign up </Link>
+                    </p>
+                }
+
             </div>
         )
     }
