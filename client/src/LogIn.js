@@ -23,7 +23,7 @@ const LogIn = props => {
             .then(response=>response.json())
             .then(data=>{
                 console.log(data.status);
-                if(data.status!==400){
+                if(data.status===400){
                     console.log('info', data.info)
                     if(data.info && data.info.message) alert(data.info.message);
                     props.setPassword('');

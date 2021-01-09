@@ -7,29 +7,7 @@ const passport = require('passport');
 
 var authController = require('../controllers/authController');
 
-router.post('/sign-up', (req, res, next) => {
-    // console.log(req,body.username)
-    // console.log(req,body.password)
-    bcrypt.hash(req.body.password, 10, (err, hashedPassword) =>{
-        if(err) {
-            console.log('first')
-            return next(err);
-        }
-        const user = new User({
-            username: req.body.username,
-            password: hashedPassword,
-            creator: true,
-        }).save((err,user) => {
-            if(err) {
-                console.log('second')   
-                next(err);
-            }
-            // res.json({user});
-            next()
-        })
-    })
-},
-authController.login);
+router.post('/sign-up', authController.sign_up, authController.login);
 
 router.post('/login', authController.login)
 

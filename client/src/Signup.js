@@ -25,8 +25,11 @@ const Signup = props =>{
             .then(data=>{
                 console.log(data);
                 if(data.status===400){
-                    console.log('info', data.info)
+                    console.log('info', data.errors)
                     if(data.info && data.info.message) alert(data.info.message);
+                    if(data.errors){
+                        data.errors.forEach(error=>alert(error.msg))
+                    }
                     props.setPassword('');
                 }
                 if(data.status===200){
