@@ -82,14 +82,23 @@ header{
   padding: 0 20px;
 }
 
-header>p, header a:visited{
+header>div>p, header a:visited{
   color: black;
+  margin-right: 10px;
 }
-
+header>div{
+  display: flex;
+  align-items: center;
+}
 header>div>a{
   margin-right: 10px;
 }
 
+.logout{
+  cursor: pointer;
+  border: 1px solid;
+  padding: 2px;
+}
 /* .signup{
   border: 1px solid red;
 } */

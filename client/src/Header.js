@@ -12,7 +12,16 @@ const Header = props =>{
         return(
         <header>
             <Link to='/'>Blog API</Link>
-            <p onClick={()=>localStorage.clear()}>Welcome {JSON.parse(localStorage.getItem('currentUser')).username}</p>
+            <div>
+                <p onClick={()=>localStorage.clear()}>Welcome {JSON.parse(localStorage.getItem('currentUser')).username}</p>
+                <p 
+                    onClick={()=>{
+                        localStorage.clear();
+                        window.location.reload();
+                        }} 
+                    className='logout'
+                >Logout</p>
+            </div>
         </header>
         )
     }else{
