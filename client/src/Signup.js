@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react"
+import { useHistory } from "react-router-dom";
 
 const Signup = props =>{
+    const history = useHistory();
+
     useEffect(()=>{
         props.setUsername('');
         props.setPassword('');
@@ -19,7 +22,24 @@ const Signup = props =>{
             })
         })
             .then(response=>response.json())
-            .then(data=>console.log(data))
+            .then(data=>{
+                console.log(data);
+                if(data.status===400){
+                    console.log('info', data.info)
+                    if(data.info && data.info.message) alert(data.info.message);
+                    props.setPassword('');
+                }
+                if(data.status===200){
+                    let token = data.token;
+                    let user = data.user;
+                    console.log('user', data.user)
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    localStorage.setItem('authToken', token);
+                    props.setUsername('');
+                    props.setPassword('');
+                    history.push('/');
+                }
+            })
             .catch(err=>console.error(err));
     }
 
