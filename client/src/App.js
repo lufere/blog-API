@@ -1,5 +1,5 @@
 import {useState } from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Switch, Route, HashRouter} from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 import './App.css';
 
@@ -41,7 +41,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Header
         checkExpiration = {checkExpiration}
       />
@@ -84,7 +84,7 @@ function App() {
           />
         </Route>
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
