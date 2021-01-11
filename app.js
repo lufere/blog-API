@@ -9,12 +9,16 @@ var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 var authRouter = require('./routes/auth');
 require('dotenv').config();
+var compression = require('compression');
+var helmet = require('helmet');
 
 const passport = require('passport');
 require('./passport');
 
 var app = express();
 
+app.use(compression());
+app.use(helmet());
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

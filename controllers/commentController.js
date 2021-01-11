@@ -24,7 +24,7 @@ exports.comment_create = [
 
         comment.save((err)=>{
             if(err) return next(err);
-            console.log('user: ', req.user);
+            // console.log('user: ', req.user);
             res.json({comment});
         })
     }

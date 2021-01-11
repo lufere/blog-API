@@ -29,6 +29,7 @@ const Header = props =>{
             <header>
                 <Link to='/'>Blog API</Link>
                 <div>
+                    <a href='https://lufere.dev/blog-manager'>Blog Manager</a>
                     <Link to='/login'>Login</Link>
                     <Link to='/signup'>Sign up</Link>
                 </div>

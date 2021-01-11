@@ -36,7 +36,7 @@ function App() {
       if(isExpired) localStorage.clear();
       // console.log(decodedToken.payload.exp);
       // console.log(dateNow.getTime()/1000);
-      console.log(isExpired);
+      // console.log(isExpired);
     }
   }
 

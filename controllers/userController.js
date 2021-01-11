@@ -15,7 +15,6 @@ exports.user_create = (req, res, next) => {
 }
 
 exports.user_detail = (req, res, next) => {
-    console.log(req.params.id);
     User.findById(req.params.id)
         .then(user=>res.json({user}))
         .catch(err=>next(err));
@@ -32,7 +31,6 @@ exports.user_update = [
                 if(req.body.password){
                     bcrypt.hash(req.body.password,10)
                     .then(hashedPassword=>{
-                        console.log(req.body.username);
                         user = new User({
                             username: req.body.username,
                             password:hashedPassword,

@@ -54,7 +54,7 @@ exports.post_update = [
             // .select('timestamp author')
             .then(post =>{
                 timestamp = post.timestamp.toString();
-                console.log(req.user.username)
+                // console.log(req.user.username)
             })
             .catch(err=>next(err));
 
@@ -70,7 +70,6 @@ exports.post_update = [
         if(!errors.isEmpty()) return res.status(400).json({errors:errors.array(),post});
         
         // console.log('author: ', timestamp);
-        // console.log('user: ', req.user);
         if(req.body.author === req.user._id.toString()){
             Post.findByIdAndUpdate(req.params.id, post, {new: true})
                 .then(updatedPost=>res.json({post:updatedPost}))

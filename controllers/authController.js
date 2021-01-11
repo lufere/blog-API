@@ -17,7 +17,7 @@ exports.login = (req, res, next) => {
 
         req.login(user, {session:false}, (err)=>{
             if(err)res.send(err);
-            const token = jwt.sign(user, process.env.secret, {expiresIn:60});
+            const token = jwt.sign(user, process.env.secret, {expiresIn:600});
             return res.json({user:user, token:token, status:200});
         });
     },{succesRedirect:'/',failureRedirect:'/'})
@@ -34,7 +34,6 @@ exports.sign_up = [
         // console.log('password: ',req,body.password)
         bcrypt.hash(req.body.password, 10, (err, hashedPassword) =>{
             if(err) {
-                console.log('first')
                 return next(err);
             }
             const user = new User({
@@ -47,7 +46,6 @@ exports.sign_up = [
 
             user.save((err,user) => {
                 if(err) {
-                    console.log('second')   
                     next(err);
                 }
                 // res.json({user});
