@@ -14,11 +14,13 @@ var helmet = require('helmet');
 
 const passport = require('passport');
 require('./passport');
+var cors = require('cors');
 
 var app = express();
 
 app.use(compression());
 app.use(helmet());
+app.use(cors());
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

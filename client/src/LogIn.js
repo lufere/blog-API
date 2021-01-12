@@ -12,7 +12,7 @@ const LogIn = props => {
 
     function onSubmit(event){
         event.preventDefault();
-        fetch('/login',{
+        fetch(`${process.env.REACT_APP_API}/login`,{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -38,16 +38,6 @@ const LogIn = props => {
                     props.setPassword('');
                     history.push('/');
                 }
-                // fetch('/users/5fe4f8d3690c0f10332c7695',{
-                //     headers: {
-                //         'Authorization': "Bearer " + token
-                //     }
-                // })
-                //     .then(response=>response.json())
-                //     .then(data=>{
-                //         console.log(data.user);
-                //         history.push('/');
-                //     })
             })
             .catch(err=>console.error(err));
     }

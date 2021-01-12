@@ -5,8 +5,9 @@ import BlogPreview from "./BlogPreview"
 const Homepage = props =>{
 
     useEffect(()=>{
+      console.log('API',process.env.REACT_APP_API)
       props.checkExpiration();
-        fetch('/posts')
+        fetch(`${process.env.REACT_APP_API}/posts`)
           .then(posts =>posts.json())
           .then(posts =>{
             // console.log(posts)

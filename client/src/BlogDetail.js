@@ -7,7 +7,7 @@ const BlogDetail = props => {
 
     useEffect(()=>{
         props.checkExpiration();
-        Promise.all([fetch('/posts/' + id),fetch('/posts/'+ id + '/comments')])
+        Promise.all([fetch(`${process.env.REACT_APP_API}/posts/` + id),fetch(`${process.env.REACT_APP_API}/posts/${id}/comments`)])
             .then(values=>{
                 let test = values.map(x=>x.json())
                 Promise.all(test)
@@ -39,7 +39,7 @@ const BlogDetail = props => {
 
     function onSubmit(event){
         event.preventDefault();
-        fetch(`/posts/${id}/comments/`,{
+        fetch(`${process.env.REACT_APP_API}/posts/${id}/comments/`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ const BlogDetail = props => {
         })
             .then(response=>response.json())
             .then(data=>{
-                fetch('/posts/'+ id + '/comments')
+                fetch(`${process.env.REACT_APP_API}/posts/${id}/comments`)
                     .then(response=>response.json())
                     .then(data=>{
                         props.setPostComments(data.comments);
