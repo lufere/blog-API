@@ -1,7 +1,7 @@
 import {useState } from 'react';
 import {Switch, Route, HashRouter} from 'react-router-dom';
 import jwt from 'jsonwebtoken';
-import './App.css';
+import './App.scss';
 
 import BlogDetail from './BlogDetail';
 import LogIn from './LogIn';

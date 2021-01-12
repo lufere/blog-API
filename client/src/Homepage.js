@@ -43,12 +43,9 @@ const Homepage = props =>{
       )
     }else{
       return(
-        <div className="App">
+        <div className="homepage">
           {/* <h3>Welcome {localStorage.getItem('currentUser')?JSON.parse(localStorage.getItem('currentUser')).username:null}</h3> */}
-          {/* <Link to='/login'>LOGIN</Link> */}
-          <div className="App-header">
             {postList}
-          </div>
         </div>
       )
     }

@@ -11,8 +11,8 @@ const Header = props =>{
     if(localStorage.getItem('currentUser')){
         return(
         <header>
-            <Link to='/'>Blog API</Link>
-            <div>
+            <Link className='logo' to='/'>Blog API</Link>
+            <nav>
                 <p onClick={()=>localStorage.clear()}>Welcome {JSON.parse(localStorage.getItem('currentUser')).username}</p>
                 <p 
                     onClick={()=>{
@@ -21,18 +21,18 @@ const Header = props =>{
                         }} 
                     className='logout'
                 >Logout</p>
-            </div>
+            </nav>
         </header>
         )
     }else{
         return(
             <header>
                 <Link to='/'>Blog API</Link>
-                <div>
+                <nav>
                     <a href='https://lufere.dev/blog-manager'>Blog Manager</a>
                     <Link to='/login'>Login</Link>
                     <Link to='/signup'>Sign up</Link>
-                </div>
+                </nav>
             </header>
         )
     }
