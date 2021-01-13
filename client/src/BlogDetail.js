@@ -30,9 +30,9 @@ const BlogDetail = props => {
     if(props.comments!=null){
         console.log('this',props.comments[0])
         var commentList = props.comments.map(comment=><div key={comment._id} className='comment'>
-            <p>By {comment.author?comment.author.username:'Anonymous'}</p>
+            <p>{comment.author?comment.author.username:'Anonymous'} said: </p>
             <p>{comment.content}</p>
-            <p>{comment.timestamp_formatted}</p>
+            <p>On {comment.timestamp_formatted}</p>
         </div>
         )
     }
@@ -73,33 +73,37 @@ const BlogDetail = props => {
         )
     }else{
         return(
-            <div>
-                <h1>{props.data.title}</h1>
-                <p>{props.data.author?props.data.author.username:null}</p>
-                <p>{props.data.content}</p>
-                <p>Published on: {props.data.timestamp_formatted}</p>
-                <h2>Comments</h2>
-                {/* <div className='spinner'></div> */}
-                {commentList}
-                {localStorage.getItem('currentUser')?
-                    <form>
-                        <label> Make a comment:
-                            <textarea
-                                name='comment'
-                                value={props.comment}
-                                onChange={props.onChange}
-                            />
-                            <button onClick={onSubmit} type='submit'>Submit</button>
-                        </label>
-                    </form>
-                    :<p className='userRequired'>
-                        You need to be a user to leave comments. 
-                        <Link to='/login'> Log in </Link>
-                        or 
-                        <Link to='/signup'> Sign up </Link>
-                    </p>
-                }
+            <div className='blogDetailContainer'>
+                <div className='blogDetail'>
+                    <h1>{props.data.title}</h1>
+                    <p className='detailAuthor'>By {props.data.author?props.data.author.username:null}</p>
+                    <p>{props.data.content}</p>
+                    <p className='detailPublished'>Published on: {props.data.timestamp_formatted}</p>
+                    <h2>Comments</h2>
+                    {/* <div className='spinner'></div> */}
+                    <div className='commentContainer'>
+                        {commentList}
+                    </div>
+                    {localStorage.getItem('currentUser')?
+                        <form>
+                            <label> Make a comment:
+                                <textarea
+                                    name='comment'
+                                    value={props.comment}
+                                    onChange={props.onChange}
+                                />
+                                <button onClick={onSubmit} type='submit'>Submit</button>
+                            </label>
+                        </form>
+                        :<p className='userRequired'>
+                            You need to be a user to leave comments. 
+                            <Link to='/login'> Log in </Link>
+                            or 
+                            <Link to='/signup'> Sign up </Link>
+                        </p>
+                    }
 
+                </div>
             </div>
         )
     }

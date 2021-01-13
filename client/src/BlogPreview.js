@@ -10,7 +10,7 @@ const BlogPreview = props => {
                 <div className='content'>
                     <h1>{props.title}</h1>
                     <p className='authorPreview'>Authored by <span>{props.author?props.author:'Anonymous'}</span> on <span>{props.timestamp}</span></p>
-                    <p>{props.content}</p>
+                    <p className='contentPreview'>{props.content}</p>
                 </div>
             </div>
         </Link>
