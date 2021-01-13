@@ -17,7 +17,7 @@ PostSchema
 PostSchema
 .virtual('timestamp_formatted')
 .get(function(){
-    return moment(this.timestamp).format('MMMM Do YYYY, h:mm:ss a');
+    return moment(this.timestamp).format('MMMM Do YYYY');
 })
 
 module.exports = mongoose.model('Post', PostSchema);

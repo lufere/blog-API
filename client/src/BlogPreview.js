@@ -9,7 +9,7 @@ const BlogPreview = props => {
             <div className='blogPreview'>
                 <div className='content'>
                     <h1>{props.title}</h1>
-                    <p>{props.author}</p>
+                    <p className='authorPreview'>Authored by <span>{props.author?props.author:'Anonymous'}</span> on <span>{props.timestamp}</span></p>
                     <p>{props.content}</p>
                 </div>
             </div>

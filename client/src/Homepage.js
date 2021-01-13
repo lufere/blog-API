@@ -29,6 +29,7 @@ const Homepage = props =>{
             author = {post.author?post.author.username:null}
             content = {post.content}
             postId = {post._id}
+            timestamp = {post.timestamp_formatted}
           />
         })
     if(props.posts.length===0){

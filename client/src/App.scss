@@ -4,6 +4,11 @@ html, body{
   background-color: rgb(197, 197, 197);
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  background-color: #C5c5c5;
+  opacity: 1;
+  background-size: 36px 63px;
+  background-position: 0 0, 0 0, 18px 32px, 18px 32px, 0 0, 18px 32px;
+  background-image:  linear-gradient(30deg, #b4b4b4 12%, transparent 12.5%, transparent 87%, #b4b4b4 87.5%, #b4b4b4), linear-gradient(150deg, #b4b4b4 12%, transparent 12.5%, transparent 87%, #b4b4b4 87.5%, #b4b4b4), linear-gradient(30deg, #b4b4b4 12%, transparent 12.5%, transparent 87%, #b4b4b4 87.5%, #b4b4b4), linear-gradient(150deg, #b4b4b4 12%, transparent 12.5%, transparent 87%, #b4b4b4 87.5%, #b4b4b4), linear-gradient(60deg, #b4b4b477 25%, transparent 25.5%, transparent 75%, #b4b4b477 75%, #b4b4b477), linear-gradient(60deg, #b4b4b477 25%, transparent 25.5%, transparent 75%, #b4b4b477 75%, #b4b4b477);
 }
 
 a:visited, a{
@@ -15,17 +20,34 @@ a:visited, a{
   // justify-content: center;
   align-items: center;
   flex-flow: column;
+  
+  // $bgColor: #b1b1b1;
+  // $bgColor: rgb(131, 159, 236);
+  
+  // background-color: #C5c5c5;
+  // opacity: 1;
+  // background-size: 36px 63px;
+  // background-position: 0 0, 0 0, 18px 32px, 18px 32px, 0 0, 18px 32px;
+
+  // background-image:  linear-gradient(30deg, #b0b0b0 12%, transparent 12.5%, transparent 87%, #b0b0b0 87.5%, #b0b0b0), linear-gradient(150deg, #b0b0b0 12%, transparent 12.5%, transparent 87%, #b0b0b0 87.5%, #b0b0b0), linear-gradient(30deg, #b0b0b0 12%, transparent 12.5%, transparent 87%, #b0b0b0 87.5%, #b0b0b0), linear-gradient(150deg, #b0b0b0 12%, transparent 12.5%, transparent 87%, #b0b0b0 87.5%, #b0b0b0), linear-gradient(60deg, #b0b0b077 25%, transparent 25.5%, transparent 75%, #b0b0b077 75%, #b0b0b077), linear-gradient(60deg, #b0b0b077 25%, transparent 25.5%, transparent 75%, #b0b0b077 75%, #b0b0b077);
+  // background-image:  linear-gradient(30deg, #bcbcbc 12%, transparent 12.5%, transparent 87%, #bcbcbc 87.5%, #bcbcbc), linear-gradient(150deg, #bcbcbc 12%, transparent 12.5%, transparent 87%, #bcbcbc 87.5%, #bcbcbc), linear-gradient(30deg, #bcbcbc 12%, transparent 12.5%, transparent 87%, #bcbcbc 87.5%, #bcbcbc), linear-gradient(150deg, #bcbcbc 12%, transparent 12.5%, transparent 87%, #bcbcbc 87.5%, #bcbcbc), linear-gradient(60deg, #bcbcbc77 25%, transparent 25.5%, transparent 75%, #bcbcbc77 75%, #bcbcbc77), linear-gradient(60deg, #bcbcbc77 25%, transparent 25.5%, transparent 75%, #bcbcbc77 75%, #bcbcbc77);
+  // background-image:  linear-gradient(30deg, #b4b4b4 12%, transparent 12.5%, transparent 87%, #b4b4b4 87.5%, #b4b4b4), linear-gradient(150deg, #b4b4b4 12%, transparent 12.5%, transparent 87%, #b4b4b4 87.5%, #b4b4b4), linear-gradient(30deg, #b4b4b4 12%, transparent 12.5%, transparent 87%, #b4b4b4 87.5%, #b4b4b4), linear-gradient(150deg, #b4b4b4 12%, transparent 12.5%, transparent 87%, #b4b4b4 87.5%, #b4b4b4), linear-gradient(60deg, #b4b4b477 25%, transparent 25.5%, transparent 75%, #b4b4b477 75%, #b4b4b477), linear-gradient(60deg, #b4b4b477 25%, transparent 25.5%, transparent 75%, #b4b4b477 75%, #b4b4b477);
+  
+  // background-image:  linear-gradient(30deg, $bgColor 12%, transparent 12.5%, transparent 87%, $bgColor 87.5%, $bgColor), linear-gradient(150deg, $bgColor 12%, transparent 12.5%, transparent 87%, $bgColor 87.5%, $bgColor), linear-gradient(30deg, $bgColor 12%, transparent 12.5%, transparent 87%, $bgColor 87.5%, $bgColor), linear-gradient(150deg, $bgColor 12%, transparent 12.5%, transparent 87%, $bgColor 87.5%, $bgColor), linear-gradient(60deg, $bgColor 25%, transparent 25.5%, transparent 75%, $bgColor 75%, $bgColor), linear-gradient(60deg, $bgColor 25%, transparent 25.5%, transparent 75%, $bgColor 75%, $bgColor);
+
+  
 }
 
 .blogPreview{
   background-color: rgb(250, 248, 218);
-  border-radius: 5px;
+  border-radius: 8px;
   color: rgb(95, 95, 95);
   // border: 2px solid black;
   padding: 10px 30px 20px 30px;
-  margin: 20px;
-  min-width: 400px;
-  max-width: 800px;
+  margin: 20px 20px;
+  // min-width: 230px;
+  width: 90vw;
+  max-width: 1300px;
   box-shadow: 3px 4px rgb(109, 109, 109);
   text-align: center;
   max-height: 400px;
@@ -36,7 +58,26 @@ a:visited, a{
     padding-bottom: 20px;
     overflow: hidden;
     max-height: 370px;
-}
+  }
+
+  .authorPreview{
+    color: rgb(228, 98, 98);
+    span{
+      font-weight: bold;
+    }
+  }
+
+  // @media only screen and (min-width: 992px) {
+  //   width: 80vw;
+  // }
+
+  // @media only screen and (min-width: 768px) {
+  //   min-width: 600px;
+  // }
+
+  // @media only screen and (min-width: 481px) {
+  //   min-width: 400px;
+  // }
 }
 
 header{
@@ -45,7 +86,7 @@ header{
   // border-bottom: solid 3px rgb(106, 129, 190);
   // border-bottom: solid 2px black;
   height: 60px;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -73,6 +114,10 @@ header{
       margin-right: 10px;
       font-size: 18px;
       color: white;
+      @media only screen and (max-width: 481px) {
+        font-size: 12px;
+      }
+
       // font-weight: bold;
     }
 
