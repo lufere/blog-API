@@ -51,29 +51,32 @@ const LogIn = props => {
         )
     }else{
         return(
-            <div>
-            <h3>Log in</h3>
-                <form>
-                    <label>Username:
-                        <input
-                            name='username' 
-                            id='username' 
-                            type='text' 
-                            value={props.username} 
-                            onChange={props.onChange}
-                        />
-                    </label>
-                    <label >Password:
-                        <input
-                            name='password' 
-                            id='password' 
-                            type='password' 
-                            value={props.password} 
-                            onChange={props.onChange}
-                        />
-                    </label>
-                    <button onClick={onSubmit} type='submit'>Log In</button>
-                </form>
+            <div className='userFormContainer'>
+                <div className='userForm'>
+                    <h3>Log in</h3>
+                    <form>
+                        <label>Username
+                            <input
+                                name='username' 
+                                id='username' 
+                                type='text' 
+                                value={props.username} 
+                                onChange={props.onChange}
+                            />
+                        </label>
+                        <label >Password
+                            <input
+                                name='password' 
+                                id='password' 
+                                type='password' 
+                                value={props.password} 
+                                onChange={props.onChange}
+                            />
+                        </label>
+                        <p>Don't have an account? <Link to='/signup'>Sign Up</Link></p>
+                        <button onClick={onSubmit} type='submit'>Log In</button>
+                    </form>
+                </div>
             </div>
         )
     }

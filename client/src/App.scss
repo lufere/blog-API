@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;0,900;1,100;1,400;1,700;1,900&display=swap');
 
 $background:rgb(250, 248, 218);
+$secondary: rgb(105, 137, 228);
 
 html, body{
   background-color: rgb(197, 197, 197);
@@ -67,8 +68,8 @@ a:visited, a{
   }
 
   .authorPreview{
-    // color: rgb(228, 98, 98);
-    color: rgb(238, 110, 25);
+    color: rgb(228, 98, 98);
+    // color: rgb(238, 110, 25);
     span{
       font-weight: bold;
     }
@@ -135,7 +136,7 @@ header{
   display: flex;
   flex-flow: column;
   align-items: center;
-  margin-top: 20px;
+  margin: 20px 0;
   padding: 0px 40px;
 
   @media only screen and (max-width: 900px) {
@@ -172,6 +173,9 @@ header{
   padding: 10px 20px;
   // border-top: solid 1px black;
   // border-left: solid 1px black;
+  :first-child{
+    font-weight: bold;
+  }
 }
 
 .logout{
@@ -183,4 +187,61 @@ header{
 .userRequired > a{
   // color: rgb(255, 102, 0);
   color: rgb(105, 137, 228);
+}
+
+.userFormContainer{
+  // border: solid red;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userForm{
+  border: solid;
+  background-color: rgb(233, 233, 233);
+  padding: 20px;
+  margin: 0 20px;
+  // color: rgb(95, 95, 95);
+  
+  h3{
+    text-align: center;
+    font-size: 30px;
+  }
+  form{
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    font-size: 20px;
+
+    label{
+      display: flex;
+      flex-flow: column;
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    input{
+      width: 200px;
+      height: 40px;
+      margin-top: 5px;
+    }
+
+    button{
+      background-color: $secondary;
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .signupSubmit{
+      background-color: rgb(25, 151, 25);
+    }
+
+  }
 }

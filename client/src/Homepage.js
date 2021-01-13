@@ -34,12 +34,14 @@ const Homepage = props =>{
         })
     if(props.posts.length===0){
       return(
-        <div className="spinner">
-          <div className="rect1"></div>
-          <div className="rect2"></div>
-          <div className="rect3"></div>
-          <div className="rect4"></div>
-          <div className="rect5"></div>
+        <div className='spinnerContainer'>  
+          <div className="spinner">
+            <div className="rect1"></div>
+            <div className="rect2"></div>
+            <div className="rect3"></div>
+            <div className="rect4"></div>
+            <div className="rect5"></div>
+          </div>
         </div>
       )
     }else{

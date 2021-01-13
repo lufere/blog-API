@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react"
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Signup = props =>{
     const history = useHistory();
@@ -47,17 +47,20 @@ const Signup = props =>{
     }
 
     return(
-        <div className='signup'>
-        <h3>Sign up</h3>
-            <form>
-                <label> Username
-                    <input type='text' name='username' value={props.username} onChange={props.onChange}></input>
-                </label>
-                <label> Password
-                    <input type='password' name='password' value={props.password} onChange={props.onChange}></input>
-                </label>
-                <button type='submit' onClick={onSubmit}>Sign up</button>
-            </form>
+        <div className='userFormContainer'>
+            <div className='userForm'>
+            <h3>Sign up</h3>
+                <form>
+                    <label> Username
+                        <input type='text' name='username' value={props.username} onChange={props.onChange}></input>
+                    </label>
+                    <label> Password
+                        <input type='password' name='password' value={props.password} onChange={props.onChange}></input>
+                    </label>
+                    <p>Already have an account? <Link to='/login'> Log In</Link></p>
+                    <button className='signupSubmit' type='submit' onClick={onSubmit}>Sign up</button>
+                </form>
+            </div>
         </div>
     )
 }
