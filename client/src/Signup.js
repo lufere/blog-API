@@ -49,7 +49,7 @@ const Signup = props =>{
     return(
         <div className='userFormContainer'>
             <div className='userForm'>
-            <h3>Sign up</h3>
+                <h3>Sign up</h3>
                 <form>
                     <label> Username
                         <input type='text' name='username' value={props.username} onChange={props.onChange}></input>

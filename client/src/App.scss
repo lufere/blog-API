@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;0,900;1,100;1,400;1,700;1,900&display=swap');
 
 $background:rgb(250, 248, 218);
-$secondary: rgb(105, 137, 228);
+$secondary: rgb(131, 159, 236);
 
 html, body{
   background-color: rgb(197, 197, 197);
@@ -42,6 +42,7 @@ a:visited, a{
 }
 
 .blogPreview{
+  border: solid;
   background-color: rgb(250, 248, 218);
   border-radius: 8px;
   color: rgb(95, 95, 95);
@@ -54,6 +55,9 @@ a:visited, a{
   box-shadow: 3px 4px rgb(109, 109, 109);
   text-align: center;
   max-height: 400px;
+  @media only screen and (min-width: 800px) {
+    width: 70vw;
+  }
   
   // overflow: hidden;
 
@@ -88,13 +92,16 @@ header{
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  
+  @media only screen and (max-width: 481px) {
+    padding: 0 0px 0 10px;
+  }
   .logo{
     font-size: 24px;
   }
 
   >a{
     font-size: 24px;
+    text-align: center;
   }
   
   a:visited, a{
@@ -106,16 +113,34 @@ header{
   nav{
     display: flex;
     align-items: center;
+    padding-left: 10px;
 
-    a{
-      margin-right: 10px;
+    a, p{
+      text-align: center;
+      margin-right: 15px;
       font-size: 18px;
       color: white;
       @media only screen and (max-width: 481px) {
         font-size: 12px;
       }
+      span{
+        font-weight: bold;
+      }
+    }
 
-      // font-weight: bold;
+    button{
+      cursor: pointer;
+      font-size: 18px;
+      background-color: rgb(113, 145, 233);
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 15px;
+      border: 2px solid rgb(190, 190, 190);
+      margin-right: 5px;
+      @media only screen and (max-width: 481px) {
+        font-size: 12px;
+      }
     }
 
   }
@@ -176,12 +201,6 @@ header{
   :first-child{
     font-weight: bold;
   }
-}
-
-.logout{
-  cursor: pointer;
-  border: 1px solid;
-  padding: 2px;
 }
 
 .userRequired > a{

@@ -23,14 +23,16 @@ const Homepage = props =>{
     },[])
 
         var postList = props.posts.map(post=>{
-          return <BlogPreview
-            key = {post.title+' - '+post.author}
-            title = {post.title}
-            author = {post.author?post.author.username:null}
-            content = {post.content}
-            postId = {post._id}
-            timestamp = {post.timestamp_formatted}
-          />
+          if(post.published){
+            return <BlogPreview
+              key = {post.title+' - '+post.author}
+              title = {post.title}
+              author = {post.author?post.author.username:null}
+              content = {post.content}
+              postId = {post._id}
+              timestamp = {post.timestamp_formatted}
+            />
+          }
         })
     if(props.posts.length===0){
       return(

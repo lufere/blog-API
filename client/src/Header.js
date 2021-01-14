@@ -11,25 +11,26 @@ const Header = props =>{
     if(localStorage.getItem('currentUser')){
         return(
         <header>
-            <Link className='logo' to='/'>Blog API</Link>
+            <Link className='logo' to='/'>Blog Viewer</Link>
             <nav>
-                <p onClick={()=>localStorage.clear()}>Welcome {JSON.parse(localStorage.getItem('currentUser')).username}</p>
-                <p 
+                <a href='https://lufere.dev/blog-manager/'>Blog Manager</a>
+                <p>Welcome <span>{JSON.parse(localStorage.getItem('currentUser')).username}</span></p>
+                <button 
                     onClick={()=>{
                         localStorage.clear();
                         window.location.reload();
                         }} 
                     className='logout'
-                >Logout</p>
+                >Logout</button>
             </nav>
         </header>
         )
     }else{
         return(
             <header>
-                <Link to='/'>Blog API</Link>
+                <Link to='/'>Blog Viewer</Link>
                 <nav>
-                    <a href='https://lufere.dev/blog-manager'>Blog Manager</a>
+                    <a href='https://lufere.dev/blog-manager/'>Blog Manager</a>
                     <Link to='/login'>Login</Link>
                     <Link to='/signup'>Sign up</Link>
                 </nav>
