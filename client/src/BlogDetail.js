@@ -31,7 +31,7 @@ const BlogDetail = props => {
         console.log('this',props.comments[0])
         var commentList = props.comments.map(comment=><div key={comment._id} className='comment'>
             <p>{comment.author?comment.author.username:'Anonymous'} said: </p>
-            <p>{comment.content}</p>
+            <p dangerouslySetInnerHTML={{__html: htmlDecode(comment.content) }}></p>
             <p>On {comment.timestamp_formatted}</p>
         </div>
         )
@@ -61,6 +61,13 @@ const BlogDetail = props => {
             })
             .catch(err=>console.error(err));
     }
+
+    function htmlDecode(input){
+        var doc = new DOMParser().parseFromString(input, "text/html");
+        // console.log('doc', doc.documentElement.textContent);
+        return doc.documentElement.textContent;
+    }
+
     if(!props.data){
         return(
             <div className="spinnerContainer">
@@ -79,7 +86,7 @@ const BlogDetail = props => {
                 <div className='blogDetail'>
                     <h1>{props.data.title}</h1>
                     <p className='detailAuthor'>By {props.data.author?props.data.author.username:null}</p>
-                    <p>{props.data.content}</p>
+                    <p className='detailContent' dangerouslySetInnerHTML={{__html: htmlDecode(props.data.content) }}></p>
                     <p className='detailPublished'>Published on: {props.data.timestamp_formatted}</p>
                     <h2>Comments</h2>
                     {/* <div className='spinner'></div> */}
