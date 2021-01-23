@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useHistory } from "react-router-dom"
 import './spinner.css'
 
 const BlogDetail = props => {
     const {id} = useParams();
+    const history = useHistory();
 
     useEffect(()=>{
+        // console.log('OVERFLOWN?',isOverflown());
         props.checkExpiration();
         Promise.all([fetch(`${process.env.REACT_APP_API}/posts/` + id),fetch(`${process.env.REACT_APP_API}/posts/${id}/comments`)])
             .then(values=>{
@@ -84,25 +86,29 @@ const BlogDetail = props => {
         return(
             <div className='blogDetailContainer'>
                 <div className='blogDetail'>
+                    <button
+                        className='return'
+                        onClick={()=>history.push('/')}
+                    />
                     <h1>{props.data.title}</h1>
                     <p className='detailAuthor'>By {props.data.author?props.data.author.username:null}</p>
                     <p className='detailContent' dangerouslySetInnerHTML={{__html: htmlDecode(props.data.content) }}></p>
                     <p className='detailPublished'>Published on: {props.data.timestamp_formatted}</p>
-                    <h2>Comments</h2>
                     {/* <div className='spinner'></div> */}
                     <div className='commentContainer'>
+                        <h2>Comments</h2>
                         {commentList}
                     </div>
                     {localStorage.getItem('currentUser')?
-                        <form>
+                        <form className='postComment'>
                             <label> Make a comment:
                                 <textarea
                                     name='comment'
                                     value={props.comment}
                                     onChange={props.onChange}
                                 />
-                                <button onClick={onSubmit} type='submit'>Submit</button>
                             </label>
+                            <button onClick={onSubmit} type='submit'>Submit</button>
                         </form>
                         :<p className='userRequired'>
                             You need to be a user to leave comments. 

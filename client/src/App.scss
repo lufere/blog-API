@@ -55,6 +55,7 @@ a:visited, a{
   box-shadow: 3px 4px rgb(109, 109, 109);
   text-align: center;
   max-height: 400px;
+  position: relative;
   @media only screen and (min-width: 800px) {
     width: 70vw;
   }
@@ -66,9 +67,32 @@ a:visited, a{
     padding-bottom: 20px;
     overflow: hidden;
     max-height: 370px;
-      .contentPreview{
+
+    background:
+    /* Shadow covers */
+    linear-gradient($background, rgba(255,255,255,0)),
+    linear-gradient(rgba(255,255,255,0), $background) 0 100%,
+    
+    /* Shadows */
+    radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+    radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+    background:
+    /* Shadow covers */
+    linear-gradient($background, rgba(255,255,255,0)),
+    linear-gradient(rgba(255,255,255,0), $background) 0 100%,
+    
+    /* Shadows */
+    radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+    radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+    
+    /* Opera doesn't support this in the shorthand */
+    background-attachment: local, local, scroll, scroll;
+    
+    .contentPreview{
         text-align: justify;
-      }
+    }
   }
 
   .authorPreview{
@@ -77,6 +101,22 @@ a:visited, a{
     span{
       font-weight: bold;
     }
+  }
+
+  .readMore{
+    // display: none;
+    position: absolute;
+    bottom: 10px;
+    padding-top: 10px;
+    // border: solid red;
+    width: calc(100% - 60px);
+    color: white;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.274);
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.438) 0%, rgba(0, 0, 0, 0.041) 100%);
+    // padding: 0 30px;
+    // margin: 0 20px;
   }
 
 }
@@ -163,6 +203,7 @@ header{
   align-items: center;
   margin: 20px 0;
   padding: 0px 40px;
+  position: relative;
 
   @media only screen and (max-width: 900px) {
     width: 90vw;
@@ -184,16 +225,68 @@ header{
     width: 100%;
     font-weight: bold;
   }
+
+  .return{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    border: none;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    // background-color: transparent;
+    background: url('https://image.flaticon.com/icons/png/512/271/271218.png') no-repeat;
+    background-size: cover;
+  }
+
+  .postComment{
+    // border: solid red;
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+
+    label{
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      // border: solid red;
+      // border: solid;
+      width: 100%;
+      textarea{
+        width: 100%;
+        margin: 10px 0px;
+      }
+    }
+    button{
+      cursor: pointer;
+      background-color: $secondary;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+    }
+  }
 }
 
 .commentContainer{
-  // border: solid red;
+  border-top: 1px solid rgb(163, 163, 163);
+  margin-top: 40px;
+  padding-top: 20px;
   // padding: 0 20px;
   width: 100%;
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
 }
+
+h2{text-align: center;}
 
 .comment{
   // border: solid;

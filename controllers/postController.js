@@ -42,30 +42,42 @@ exports.post_detail = (req, res, next) =>{
 
 exports.post_update = [
     body('title', 'Title required').trim().escape().isLength({min:1}),
-    body('content', "Post content can't be empty").trim().escape().isLength({min:1}),
+    body('content', "Post content can't be empty").trim().escape(),
     body('published').trim().escape(),
     body('author', 'Author required').trim().escape().isLength({min:1}),
 
     (req, res, next) =>{
         const errors = validationResult(req);
         var timestamp;
+        var postContent;
         // var author;
         Post.findById(req.params.id)
             // .select('timestamp author')
             .then(post =>{
                 timestamp = post.timestamp.toString();
+                postContent = post.content;
                 // console.log(req.user.username)
             })
             .catch(err=>next(err));
-
-        const post = new Post({
-            title:req.body.title,
-            content:req.body.content,
-            timestamp: timestamp,
-            author: req.user,
-            published: req.body.published,
-            _id: req.params.id
-        });
+        if(!req.body.content){
+            var post = new Post({
+                title:req.body.title,
+                content:postContent,
+                timestamp: timestamp,
+                author: req.user,
+                published: req.body.published,
+                _id: req.params.id
+            });
+        }else{
+            var post = new Post({
+                title:req.body.title,
+                content:req.body.content,
+                timestamp: timestamp,
+                author: req.user,
+                published: req.body.published,
+                _id: req.params.id
+            });
+        }
 
         if(!errors.isEmpty()) return res.status(400).json({errors:errors.array(),post});
         

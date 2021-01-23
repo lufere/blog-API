@@ -1,28 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import BlogPreview from "./BlogPreview"
 
 const Homepage = props =>{
-
     useEffect(()=>{
-      console.log('API',process.env.REACT_APP_API)
       props.checkExpiration();
-        fetch(`${process.env.REACT_APP_API}/posts`)
-          .then(posts =>posts.json())
-          .then(posts =>{
-            // console.log(posts)
-              setTimeout(() => {
-                props.setPosts(posts.post_list);
-              }, 1100);
-          })
-          .catch(err=>console.error(`Error: ${err}`));
-          // console.log(localStorage.getItem('authToken'));
-        //   console.log(localStorage.getItem('currentUser'));
-          // localStorage.clear();
-          // console.log('Check expiration');
+      fetch(`${process.env.REACT_APP_API}/posts`)
+        .then(posts =>posts.json())
+        .then(posts =>{
+          // console.log(posts)
+            setTimeout(() => {
+              props.setPosts(posts.post_list);
+            }, 1100);
+        })
+        .catch(err=>console.error(`Error: ${err}`));
+        // console.log(localStorage.getItem('authToken'));
+      //   console.log(localStorage.getItem('currentUser'));
+        // localStorage.clear();
+        // console.log('Check expiration');
     },[])
 
-        var postList = props.posts.map(post=>{
+        var postList = props.posts.map((post,i)=>{
           if(post.published){
             return <BlogPreview
               key = {post.title+' - '+post.author}
@@ -31,7 +29,10 @@ const Homepage = props =>{
               content = {post.content}
               postId = {post._id}
               timestamp = {post.timestamp_formatted}
+              index = {i}
             />
+          }else{
+            return null
           }
         })
     if(props.posts.length===0){
