@@ -16,6 +16,7 @@ function App() {
   const [comment, setComment] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState();
   // var postList = <p></p>;
 
   function handleChange(event){
@@ -72,10 +73,14 @@ function App() {
             setUsername={setUsername}
             setPassword={setPassword}
             onChange={handleChange}
+            errors={errors}
+            setErrors={setErrors}
           />
         </Route>
         <Route path='/signup'>
           <Signup
+            errors={errors}
+            setErrors={setErrors}
             username={username}
             password={password}
             setUsername={setUsername}

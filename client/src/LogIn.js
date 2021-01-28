@@ -8,6 +8,7 @@ const LogIn = props => {
     useEffect(()=>{
         props.setUsername('');
         props.setPassword('');
+        props.setErrors();
     },[])
 
     function onSubmit(event){
@@ -24,8 +25,7 @@ const LogIn = props => {
             .then(data=>{
                 console.log(data.status);
                 if(data.status===400){
-                    console.log('info', data.info)
-                    if(data.info && data.info.message) alert(data.info.message);
+                    props.setErrors(data.info.message);
                     props.setPassword('');
                 }
                 if(data.status===200){
@@ -52,6 +52,7 @@ const LogIn = props => {
     }else{
         return(
             <div className='userFormContainer'>
+                {props.errors?<div className='errorBanner'>{props.errors}</div>:null}
                 <div className='userForm'>
                     <h3>Log in</h3>
                     <form>
