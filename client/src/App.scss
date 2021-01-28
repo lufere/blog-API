@@ -210,6 +210,22 @@ header{
     padding: 0 20px;
   }
 
+  h1{
+    text-align: center;
+  }
+
+  @media only screen and (max-width: 500px) {
+    h1{
+      padding: 0 40px;
+      // color: red;
+    }
+
+    .return{
+      left:10px;
+      // width: 80px;
+    }
+  }
+
   .detailAuthor{
     color: rgb(105, 137, 228);
     // border: solid;
@@ -237,6 +253,11 @@ header{
     // background-color: transparent;
     background: url('https://image.flaticon.com/icons/png/512/271/271218.png') no-repeat;
     background-size: cover;
+    @media only screen and (max-width: 500px) {
+      left: 15px;
+    }
+
+
   }
 
   .postComment{
